@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="this is a picture of me and my girlfriend on memorial day weekend first PTO"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/bio_padding"
+    android:paddingEnd="@dimen/bio_padding"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/name_text"
+        style="@style/about_me_title_style"
+        android:text="@string/about_me_name" />
+
+    <ImageView
+        android:id="@+id/mirna_and_paul"
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:contentDescription="@string/content_desc_image"
+        android:padding="8dp"
+
+        app:srcCompat="@drawable/looties" />
+
+    <ScrollView
+        android:id="@+id/bio_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+
+        <TextView
+            android:id="@+id/bio_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.2"
+            android:text="@string/bio_text_text"
+            android:textSize="20sp" />
+    </ScrollView>
+</LinearLayout>
