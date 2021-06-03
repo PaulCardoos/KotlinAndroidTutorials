@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FindMyAge</string>
+    <string name="year_hint">Enter any year</string>
+    <string name="display_age_text">Enter a year</string>
+    <string name="Find_age_btn_text">Find Age</string>
+
+</resources>
