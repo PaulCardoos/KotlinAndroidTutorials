@@ -1,5 +1,7 @@
 package com.example.tictactoeapp
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -31,13 +33,96 @@ class MainActivity : AppCompatActivity() {
     }
     var activePlayer = 1
     var player1 = ArrayList<Int>()
+    var player2 = ArrayList<Int>()
+
     fun playGame(cellId:Int, select:Button){
         if(activePlayer == 1){
             select.text = "X"
-            select.setBackgroundResource(R.color.green)
+            select.setTextColor(resources.getColor(R.color.red))
+            player1.add(cellId)
+            activePlayer = 0
         }else{
             select.text = "O"
-            select.setBackgroundResource(R.color.pink)
+            select.setTextColor(resources.getColor(R.color.green))
+            player2.add(cellId)
+            activePlayer = 1
+        }
+
+        select.isEnabled = false
+
+        //after each move check if there is a winner
+        checkWinner()
+
+    }
+
+    private fun checkWinner() {
+
+        var winner = -1
+
+        //check for horizontal winner
+        if(player1.contains(1) && player1.contains(2) && player1.contains(3)){
+            winner = 1
+        }
+        if(player2.contains(1) && player2.contains(2) && player2.contains(3)){
+            winner = 2
+        }
+        if(player1.contains(4) && player1.contains(5) && player1.contains(6)){
+            winner = 1
+        }
+        if(player2.contains(4) && player2.contains(5) && player2.contains(6)){
+            winner = 2
+        }
+
+        if(player1.contains(7) && player1.contains(8) && player1.contains(9)){
+            winner = 1
+        }
+        if(player2.contains(7) && player2.contains(8) && player2.contains(9)){
+            winner = 2
+        }
+
+        //check for vertical winner
+        if(player1.contains(1) && player1.contains(4) && player1.contains(7)){
+            winner = 1
+        }
+        if(player2.contains(1) && player2.contains(4) && player2.contains(7)){
+            winner = 2
+        }
+
+        if(player1.contains(2) && player1.contains(5) && player1.contains(8)){
+            winner = 1
+        }
+        if(player2.contains(2) && player2.contains(5) && player2.contains(8)){
+            winner = 2
+        }
+
+        if(player1.contains(3) && player1.contains(6) && player1.contains(9)){
+            winner = 1
+        }
+        if(player2.contains(3) && player2.contains(6) && player2.contains(9)){
+            winner = 2
+        }
+
+        //check diagonal winner
+        if(player1.contains(1) && player1.contains(5) && player1.contains(9)){
+            winner = 1
+        }
+        if(player2.contains(1) && player2.contains(5) && player2.contains(9)){
+            winner = 2
+        }
+
+        if(player1.contains(3) && player1.contains(5) && player1.contains(6)){
+            winner = 1
+        }
+        if(player2.contains(3) && player2.contains(6) && player2.contains(5)){
+            winner = 2
+        }
+
+        if(winner == 1){
+            Toast.makeText(applicationContext, "Player 1 wins!", Toast.LENGTH_SHORT).show()
+        }else if(winner == 2){
+            Toast.makeText(applicationContext, "Player 2 wins!", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(applicationContext, "Draw", Toast.LENGTH_SHORT).show()
         }
 
     }
