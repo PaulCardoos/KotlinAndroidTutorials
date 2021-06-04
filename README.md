@@ -13,4 +13,7 @@ Some technologies I refreshed myself on was textview, edittext, constraint layou
 
 <img src="FindMyAge/FindMyAge.png" height=500/>
 
+## Day 3 (Tic Tac Toe App)
+Got started with a tic tac toe game application. Learning table layout, table rows, margins, gravity, and how to implement logic to change colors and texts using code. Kotlin is awesome. 
+
 
