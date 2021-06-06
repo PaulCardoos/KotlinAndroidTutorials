@@ -16,4 +16,9 @@ Some technologies I refreshed myself on was textview, edittext, constraint layou
 ## Day 3 (Tic Tac Toe App)
 Got started with a tic tac toe game application. Learning table layout, table rows, margins, gravity, and how to implement logic to change colors and texts using code. Kotlin is awesome. 
 
+## Day 4 (Tic Tac Toe App)
+Spent 40 minutes coding in Kotlin today because I am planning to go to the North End with my girlfriend for pizza. I spent 20 minutes of it trying to change the color of a button when you click on it. Surprisingly, this is way more complicated than you would think in Android. The tic tac toe logic is basic logic using if/else statements and works now if two people are playing. Tommorow, I am going to implement the game so that you can play solo against the computer. Im thinking about using minmax algorithm to do this using AI. Most likely I will make it so the computer selects a random square. I dont want to spend to much time on a simple aplication because the goal is to get good at android development. Anyways, be back tommorow.
+
+## Day 5 (Pokemon Android)
+My tic tac toe app is a little buggy and not working correctly because R.id.button is being read as an inter by intellij and not as a view object. Im not sure what the problem is. I did not want this to hold me up so I moved onto coding a pokemon app. In this app we are going over basic permissions (dangerous vs normal) and how to get user location. It is almost midnight now. I am going to keep going with this app until it breaks or something gets stuck. Pictures to come
 
