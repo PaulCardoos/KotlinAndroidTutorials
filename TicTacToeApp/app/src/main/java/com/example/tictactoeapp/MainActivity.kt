@@ -1,12 +1,12 @@
 package com.example.tictactoeapp
 
-import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         var cellId = 0
         val select = view as Button
         when(select.id){
-            R.id.button1 -> cellId = 1
+            R.id.bu1 -> cellId = 1
             R.id.button2 -> cellId = 2
             R.id.button3 -> cellId = 3
             R.id.button4 -> cellId = 4
@@ -35,12 +35,13 @@ class MainActivity : AppCompatActivity() {
     var player1 = ArrayList<Int>()
     var player2 = ArrayList<Int>()
 
-    fun playGame(cellId:Int, select:Button){
+    private fun playGame(cellId:Int, select: Button){
         if(activePlayer == 1){
             select.text = "X"
             select.setTextColor(resources.getColor(R.color.red))
             player1.add(cellId)
-            activePlayer = 0
+            activePlayer = 2
+            soloPlay()
         }else{
             select.text = "O"
             select.setTextColor(resources.getColor(R.color.green))
@@ -54,6 +55,12 @@ class MainActivity : AppCompatActivity() {
         checkWinner()
 
     }
+
+    private fun soloPlay() {
+
+
+    }
+
 
     private fun checkWinner() {
 
