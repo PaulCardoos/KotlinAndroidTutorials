@@ -41,6 +41,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         checkPermission()
+        loadPokemon()
     }
 
     /**
@@ -64,7 +65,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .snippet("You are here now")
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeball_icon)))
         //adjust this to zoom in on map
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,7f))
     }
 
     //we need to check for permissions if a dangerous permission is needed in android such as fine
@@ -74,7 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
           var listener = MyLocationListen()
           var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3, 3f, listener)
+          locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 3f, listener)
           val t = MyThread()
           t.start()
     }
@@ -128,23 +129,49 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-
+    var oldLocation:Location?=null
     inner class MyThread : Thread {
-        constructor():super(){ }
+        constructor():super(){
+            oldLocation = Location("start")
+            oldLocation!!.longitude = 0.0
+            oldLocation!!.latitude = 0.0
+
+        }
         override fun run() {
             while (true){
                 try{
-                    runOnUiThread {
+                    if(oldLocation!!.distanceTo(location) == 0f){
+                        continue
+                    } else{
+                        runOnUiThread {
+                            mMap.clear()
+                            //show my location
+                            val sydney = LatLng(location!!.latitude, location!!.longitude)
+                            //edit the marker config
+                            mMap.addMarker(MarkerOptions()
+                                .position(sydney)
+                                .title("Me")
+                                .snippet("You are here now")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeball_icon)))
+                            //adjust this to zoom in on map
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,7f))
 
-                        val sydney = LatLng(location!!.latitude, location!!.longitude)
-                        //edit the marker config
-                        mMap.addMarker(MarkerOptions()
-                            .position(sydney)
-                            .title("Me")
-                            .snippet("You are here now")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.pokeball_icon)))
-                        //adjust this to zoom in on map
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14f))
+                            //show pokemon location
+                            for(i in 0 until Pokedex.size){
+
+                                val pokemonLocation = LatLng(Pokedex[i].lat, Pokedex[i].lon)
+                                //edit the marker config
+                                mMap.addMarker(MarkerOptions()
+                                    .position(pokemonLocation)
+                                    .title(Pokedex[0].name)
+                                    .snippet("You are here now")
+                                    .icon(BitmapDescriptorFactory.fromResource(Pokedex[i].image)))
+                                //adjust this to zoom in on map
+                            }
+
+                            oldLocation = location
+
+                        }
                     }
 
                     Thread.sleep(1000)
@@ -152,6 +179,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }catch (ex : Exception){ }
             }
         }
+    }
+
+    var Pokedex = ArrayList<Pokemon>()
+
+    private fun loadPokemon(){
+        Pokedex.add(Pokemon("Charamander",
+            R.drawable.charamander_icon,
+            "Charmander is a small, bipedal, dinosaur like Pokémon. Most of its body is "+
+                    "colored orange, while its underbelly is a light yellow color. Charmander," +
+                    " along with all of its evolved forms, has a flame that is constantly burning " +
+                    "on the end of its tail.", 50.0, 42.12, -70.96)
+            )
+        Pokedex.add(Pokemon("Charazard",
+            R.drawable.charazard,
+            "CCharizard is a draconic, bipedal Pokémon. It is primarily orange with a " +
+                    "cream underside from the chest to the tip of its tail. It has a long neck, " +
+                    "small blue eyes, slightly raised nostrils, and two horn-like structures " +
+                    "protruding from the back of its rectangular head.",
+            50.0, 42.24, -70.80)
+            )
+        Pokedex.add(Pokemon("Charamander",
+            R.drawable.ninetails_icon,
+            "Nine-tails is a legendary pokemon...lol", 50.0, 42.19, -70.72)
+            )
+        Pokedex.add(Pokemon("Charamander",
+            R.drawable.vileplume_icon,
+            "Vileplume is a cool pokemon", 50.0, 42.30, -70.90)
+            )
+        Pokedex.add(Pokemon("Charamander",
+            R.drawable.ivysaur_icon,
+            "Ivysaur lives in wompatuck state park", 50.0, 42.20, -70.84)
+            )
+
 
     }
 
