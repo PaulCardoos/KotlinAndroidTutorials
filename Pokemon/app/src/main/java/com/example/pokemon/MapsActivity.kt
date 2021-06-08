@@ -159,14 +159,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             //show pokemon location
                             for(i in 0 until Pokedex.size){
 
-                                val pokemonLocation = LatLng(Pokedex[i].lat, Pokedex[i].lon)
+                                val pokemonLocation = LatLng(Pokedex[i].location!!.latitude,
+                                Pokedex[i].location!!.longitude)
                                 //edit the marker config
                                 mMap.addMarker(MarkerOptions()
                                     .position(pokemonLocation)
-                                    .title(Pokedex[0].name)
-                                    .snippet("You are here now")
+                                    .title(Pokedex[i].name)
+                                    .snippet(Pokedex[i].description)
                                     .icon(BitmapDescriptorFactory.fromResource(Pokedex[i].image)))
                                 //adjust this to zoom in on map
+
+                                if(location!!.distanceTo(Pokedex[i].location) < 2){
+                                    Pokedex[i].isCaught = true
+                                    Toast.makeText(applicationContext, "You caught a new pokemon",
+                                    Toast.LENGTH_SHORT).show()
+                                }
                             }
 
                             oldLocation = location
@@ -199,15 +206,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     "protruding from the back of its rectangular head.",
             50.0, 42.24, -70.80)
             )
-        Pokedex.add(Pokemon("Charamander",
+        Pokedex.add(Pokemon("Nine-tails",
             R.drawable.ninetails_icon,
             "Nine-tails is a legendary pokemon...lol", 50.0, 42.19, -70.72)
             )
-        Pokedex.add(Pokemon("Charamander",
+        Pokedex.add(Pokemon("Vileplume",
             R.drawable.vileplume_icon,
             "Vileplume is a cool pokemon", 50.0, 42.30, -70.90)
             )
-        Pokedex.add(Pokemon("Charamander",
+        Pokedex.add(Pokemon("Ivysaur",
             R.drawable.ivysaur_icon,
             "Ivysaur lives in wompatuck state park", 50.0, 42.20, -70.84)
             )
