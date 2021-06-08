@@ -27,4 +27,7 @@ Got my location working on this map. One glitched that was a challenge to learn 
 
 <img src="Pokemon/pokdex_app.png" height=500/>
 
+## Day 7 (Pokemon App) 
+I finished implementing what I am going to do for the pokemon app. I added a naive way to catch pokemon which I will test in real life. I spend most of today try oto figure out how to code bluetooth low energy in Kotlin. I learned about GATT, services, characteristics, and how to connect via BluetoothGatt class. Will continue learning tommorow and will hope to implement something that works through hard work and dedication. :)
+
 
